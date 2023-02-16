@@ -6,7 +6,7 @@
 <#import "components/atoms/link.ftl" as link>
 
 <@layout.registrationLayout
-  displayMessage=!messagesPerField.existsError("firstName", "lastName", "email", "username", "password", "password-confirm")
+  displayMessage=!messagesPerField.existsError("firstName", "lastName", "email", "username", "password", "password-confirm", "mobilephone")
   ;
   section
 >
@@ -41,6 +41,15 @@
         name="email"
         type="email"
         value=(register.formData.email)!''
+      />
+      <@input.kw
+        autocomplete="mobilePhone"
+        invalid=messagesPerField.existsError("mobilephone")
+        label=msg("mobilePhone")
+        message=kcSanitize(messagesPerField.get("mobilePhone"))
+        name="user.attributes.mobilephone"
+        type="text"
+        value=(register.formData.mobilephone)!''
       />
       <#if !realm.registrationEmailAsUsername>
         <@input.kw
